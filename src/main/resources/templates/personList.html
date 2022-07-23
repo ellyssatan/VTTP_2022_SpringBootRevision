@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>List of contacts</title>
+</head>
+<body>
+    <h1>Persons List</h1>
+
+    <a th:href="@{/addPerson}">Add person</a>
+    <br>
+    <br>
+    <div>
+        <table>
+            <tr>
+                <td>ID</td>
+                <td>First Name</td>
+                <td>Last Name</td>
+                <td>Edit</td>
+                <td>Delete</td>
+            </tr>
+            <tr th:each="person : ${persons}">
+                <td th:text="${person.id}">...</td>
+                <td th:text="${person.firstName}">...</td>
+                <td th:text="${person.lastName}">...</td>
+                <td><button type="button" value="Edit" >Edit</button></td>
+                <td><button type="submit" value="Delete">Delete</button></td>
+            </tr>
+
+        </table>
+    </div>
+
+</body>
+</html>
