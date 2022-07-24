@@ -24,4 +24,16 @@ public class PersonService {
     public void addPerson(Person p) {
         persons.add(new Person(p.getFirstName(), p.getLastName()));
     }
+
+    // return selected person
+    public Person getPerson(String id) {
+        for (Person p : persons) {
+            if (p.getId() == id) {
+                return p;
+            }
+        }
+        return null;
+    }
 }
+
+

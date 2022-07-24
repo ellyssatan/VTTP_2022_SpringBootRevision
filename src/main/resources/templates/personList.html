@@ -26,8 +26,10 @@
                 <td th:text="${person.id}">...</td>
                 <td th:text="${person.firstName}">...</td>
                 <td th:text="${person.lastName}">...</td>
-                <td><button type="button" value="Edit" >Edit</button></td>
-                <td><button type="submit" value="Delete">Delete</button></td>
+                <td><button type="button" onclick="location.href='@{/index}'">Edit</button>
+                    <button type="button" onclick="th:href='@{/edit}'" >test</button>
+                </td>
+                <td><button type="button" value="Delete">Delete</button></td>
             </tr>
 
         </table>

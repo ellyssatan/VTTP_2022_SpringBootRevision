@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -78,5 +80,40 @@ public class PersonController {
         return "addPerson";
     }
 
+    // Retrieve person info
+    // @PutMapping(value="/edit")
+    // public String personInfo(Model model, PersonForm personForm) {
+
+    //     PersonForm pForm = new PersonForm();
+    //     String id = ;
+
+    //     Person p = pService.getPerson(id);
+        
+    //     model.addAttribute("Person", p);
+    //     return "update";
+    // }
+
+    // @GetMapping(value = "/{id}", produces = "text/html")
+    // public String getContact(@PathVariable("id") String id, Model model) { 
+
+    //     Person p = pService.getPerson(id);
+
+    //     System.out.printf(">> id: %s", p);
+    //     model.addAttribute("contact", p);
+    //     return "edit";
+
+    // }
+
+    @GetMapping(value="/{id}", produces="application/json")
+    public @ResponseBody Person getContact(@PathVariable("id") String id) { 
+
+        Person p = pService.getPerson(id);
+
+        System.out.printf(">> id: %s\n", id);
+        System.out.println(p.toString());
+
+        return p;
+
+    }
 
 }
