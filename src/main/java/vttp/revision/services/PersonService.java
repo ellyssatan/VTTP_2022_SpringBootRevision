@@ -34,6 +34,37 @@ public class PersonService {
         }
         return null;
     }
+
+    public String updatePerson(Person p) {
+        boolean pExists = false;
+        for (Person curr : persons) {
+            if (curr.getId().equals(p.getId())) {
+                pExists = true;
+                curr.setFirstName(p.getFirstName());
+                curr.setLastName(p.getLastName());
+            }
+        }
+        if (!pExists) {
+            persons.add(p);
+            return "Person added";
+        }
+        return "Person updated";
+    }
+
+    public String deletePerson(Person p) {
+        boolean pExists = false;
+        for (Person curr : persons){
+          if (curr.getId().equals(p.getId())){
+            pExists = true;
+            persons.remove(curr);
+            break;
+          }
+        }
+        if (pExists){
+          return "Person deleted!";
+        }
+        return "No Person deleted";
+    }
 }
 
 

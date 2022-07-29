@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -81,17 +80,34 @@ public class PersonController {
     }
 
     // Retrieve person info
-    // @PutMapping(value="/edit")
-    // public String personInfo(Model model, PersonForm personForm) {
+    @GetMapping(value="/edit/{id}", produces="text/html")
+    public String showEditPersonForm(@PathVariable("id") String id, Model model){
+        Person p = pService.getPerson(id);
+        System.out.printf("> id: %s\n", id);
+        System.out.println(p);
 
-    //     PersonForm pForm = new PersonForm();
-    //     String id = ;
+        model.addAttribute("person", p);
+        return "edit";
+    }
 
-    //     Person p = pService.getPerson(id);
+    @PostMapping(value="/edit/{id}", produces="text/html")
+    public String personInfo(@PathVariable("id") String id, @ModelAttribute("personForm") PersonForm personForm, Model model) {
+
+        Person p = pService.getPerson(id);
+        p.setFirstName(personForm.getFirstName());
+        p.setLastName(personForm.getLastName());
+        pService.updatePerson(p);
         
-    //     model.addAttribute("Person", p);
-    //     return "update";
-    // }
+        model.addAttribute("Person", p);
+        return "redirect:/personList";
+    }
+
+    @GetMapping(value="/deletePerson/{id}", produces="text/html")
+    public String deletePerson(@PathVariable("id") String id) {
+        Person p = pService.getPerson(id);
+        pService.deletePerson(p);
+        return "redirect:/personList";
+    }
 
     // @GetMapping(value = "/{id}", produces = "text/html")
     // public String getContact(@PathVariable("id") String id, Model model) { 
